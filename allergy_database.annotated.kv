@@ -1,6 +1,11 @@
 #:kivy 2.3.1
 
-# Define responsive constants that work in KV
+# Annotated KV file: allergy_database.annotated.kv
+# This file is the same UI structure as allergy_database.kv but contains
+# inline comments explaining what each block does. Beginners should read
+# the comments to learn how KV layouts map to the Python Screen classes.
+
+# Responsive constants: use dp() values and switch sizes for mobile vs desktop.
 #:set MOBILE_PADDING dp(15)
 #:set DESKTOP_PADDING dp(20)
 #:set MOBILE_SPACING dp(15)
@@ -10,30 +15,36 @@
 #:set MOBILE_INPUT_HEIGHT dp(50)
 #:set DESKTOP_INPUT_HEIGHT dp(35)
 
-# Common styling rules
+# -- Reusable widget templates -------------------------------------------------
+# These are rules that create small styled widgets for consistent appearance.
+# <CommonButton@Button> creates a new widget class named CommonButton that
+# behaves like Button but with our chosen defaults (font size and height).
 <CommonButton@Button>:
     font_size: sp(14)
     size_hint_y: None
     height: MOBILE_BUTTON_HEIGHT if app.ui_config.is_mobile else DESKTOP_BUTTON_HEIGHT
 
+# CommonLabel sets default font sizing and alignment behavior for labels.
 <CommonLabel@Label>:
     font_size: sp(12)
     text_size: self.size
     valign: 'middle'
     halign: 'left'
 
+# CommonTextInput is a TextInput with fixed height so it fits nicely in forms.
 <CommonTextInput@TextInput>:
     font_size: sp(12)
     size_hint_y: None
     height: MOBILE_INPUT_HEIGHT if app.ui_config.is_mobile else DESKTOP_INPUT_HEIGHT
 
+# TitleLabel is a larger label used for screen titles.
 <TitleLabel@Label>:
     font_size: sp(20)
     bold: True
     size_hint_y: None
     height: dp(80) if app.ui_config.is_mobile else dp(50)
 
-# Styled button classes
+# Styled button subclasses for quick color theming.
 <PrimaryButton@CommonButton>:
     background_color: 0.2, 0.6, 1, 1
     color: 1, 1, 1, 1
@@ -50,7 +61,10 @@
     background_color: 0.3, 0.8, 0.3, 1
     color: 1, 1, 1, 1
 
-# Main Screen
+# -- Main Screen ---------------------------------------------------------------
+# The MainScreen rule defines the UI that appears on the 'main' screen.
+# Note: on_kv_post calls a Python method so that the Python Screen instance
+# can receive a callback once the KV widgets are bound.
 <MainScreen>:
     on_kv_post: root.on_kv_post()
     BoxLayout:
@@ -58,12 +72,14 @@
         padding: MOBILE_PADDING * 2 if app.ui_config.is_mobile else DESKTOP_PADDING * 2
         spacing: MOBILE_SPACING * 2 if app.ui_config.is_mobile else DESKTOP_SPACING * 2
         
+        # Title at the top
         TitleLabel:
             text: 'Food Allergy Database'
             font_size: sp(28) if app.ui_config.is_mobile else sp(24)
             height: dp(110) if app.ui_config.is_mobile else dp(80)
             halign: 'center'
         
+        # Buttons navigate to other screens by calling Python methods on the root.
         PrimaryButton:
             text: 'Add New Allergy'
             height: dp(80) if app.ui_config.is_mobile else dp(60)
@@ -88,7 +104,8 @@
             font_size: sp(18) if app.ui_config.is_mobile else sp(16)
             on_press: root.exit_app()
 
-# Allergy Entry Screen
+# -- Allergy Entry Screen ----------------------------------------------------
+# This screen contains a scrollable form for entering a new allergy.
 <AllergyEntryScreen>:
     on_kv_post: root.on_kv_post()
     BoxLayout:
@@ -100,6 +117,7 @@
             text: 'Add New Allergy'
             halign: 'center'
         
+        # Use a ScrollView so the form works on small screens.
         ScrollView:
             BoxLayout:
                 orientation: 'vertical'
@@ -107,7 +125,8 @@
                 size_hint_y: None
                 height: self.minimum_height
                 
-                # Main form using responsive grid
+                # Main form using a GridLayout. On mobile it is single-column,
+                # on wider screens it becomes two columns.
                 GridLayout:
                     cols: 1 if app.ui_config.is_mobile else 2
                     spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
@@ -136,7 +155,7 @@
                         height: MOBILE_INPUT_HEIGHT if app.ui_config.is_mobile else DESKTOP_INPUT_HEIGHT
                         font_size: sp(12)
                 
-                # Full-width text fields
+                # Larger multi-line fields for symptoms, ingredients and notes.
                 BoxLayout:
                     orientation: 'vertical'
                     spacing: dp(5)
@@ -194,7 +213,7 @@
                         height: dp(80)
                         font_size: sp(12)
         
-        # Button layout - responsive
+        # Buttons at the bottom: Add, Clear, Back. They rearrange for mobile.
         BoxLayout:
             orientation: 'vertical' if app.ui_config.is_mobile else 'horizontal'
             size_hint_y: None
@@ -213,7 +232,9 @@
                 text: 'Back to Main'
                 on_press: root.go_back()
 
-# Allergy List Screen
+# -- Allergy List Screen -----------------------------------------------------
+# Shows all saved allergies in a scrollable area. The Python code builds each
+# list item widget programmatically for richer control.
 <AllergyListScreen>:
     on_kv_post: root.on_kv_post()
     BoxLayout:
@@ -221,7 +242,7 @@
         padding: MOBILE_PADDING if app.ui_config.is_mobile else DESKTOP_PADDING
         spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
         
-        # Header
+        # Header area with title and small controls
         BoxLayout:
             orientation: 'vertical' if app.ui_config.is_mobile else 'horizontal'
             size_hint_y: None
@@ -252,6 +273,7 @@
                     width: dp(100)
                     on_press: root.go_back()
         
+        # The ScrollView's child has an id so Python can add the list items here.
         ScrollView:
             BoxLayout:
                 id: list_layout
@@ -260,7 +282,8 @@
                 size_hint_y: None
                 height: self.minimum_height
 
-# Search Screen
+# -- Search Screen -----------------------------------------------------------
+# Simple search UI: a text input and a results area below it.
 <SearchScreen>:
     on_kv_post: root.on_kv_post()
     BoxLayout:
@@ -272,7 +295,7 @@
             text: 'Search Allergies'
             halign: 'center'
         
-        # Search layout
+        # The top search row contains the input and buttons.
         BoxLayout:
             orientation: 'vertical' if app.ui_config.is_mobile else 'horizontal'
             size_hint_y: None
@@ -314,6 +337,7 @@
                     width: dp(100)
                     on_press: root.go_back()
         
+        # Area that shows the search summary text and the list of results below.
         CommonLabel:
             id: results_label
             text: 'Enter search term above'
