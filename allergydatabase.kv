@@ -1,0 +1,330 @@
+#:kivy 2.3.1
+
+# Define responsive constants that work in KV
+#:set MOBILE_PADDING dp(15)
+#:set DESKTOP_PADDING dp(20)
+#:set MOBILE_SPACING dp(15)
+#:set DESKTOP_SPACING dp(10)
+#:set MOBILE_BUTTON_HEIGHT dp(60)
+#:set DESKTOP_BUTTON_HEIGHT dp(40)
+#:set MOBILE_INPUT_HEIGHT dp(50)
+#:set DESKTOP_INPUT_HEIGHT dp(35)
+
+# Common styling rules
+<CommonButton@Button>:
+    font_size: sp(14)
+    size_hint_y: None
+    height: MOBILE_BUTTON_HEIGHT if app.ui_config.is_mobile else DESKTOP_BUTTON_HEIGHT
+
+<CommonLabel@Label>:
+    font_size: sp(12)
+    text_size: self.size
+    valign: 'middle'
+    halign: 'left'
+
+<CommonTextInput@TextInput>:
+    font_size: sp(12)
+    size_hint_y: None
+    height: MOBILE_INPUT_HEIGHT if app.ui_config.is_mobile else DESKTOP_INPUT_HEIGHT
+
+<TitleLabel@Label>:
+    font_size: sp(20)
+    bold: True
+    size_hint_y: None
+    height: dp(80) if app.ui_config.is_mobile else dp(50)
+
+# Styled button classes
+<PrimaryButton@CommonButton>:
+    background_color: 0.2, 0.6, 1, 1
+    color: 1, 1, 1, 1
+
+<SecondaryButton@CommonButton>:
+    background_color: 0.7, 0.7, 0.7, 1
+    color: 0, 0, 0, 1
+
+<DangerButton@CommonButton>:
+    background_color: 1, 0.3, 0.3, 1
+    color: 1, 1, 1, 1
+
+<SuccessButton@CommonButton>:
+    background_color: 0.3, 0.8, 0.3, 1
+    color: 1, 1, 1, 1
+
+# Main Screen
+<MainScreen>:
+    on_kv_post: root.on_kv_post()
+    BoxLayout:
+        orientation: 'vertical'
+        padding: MOBILE_PADDING * 2 if app.ui_config.is_mobile else DESKTOP_PADDING * 2
+        spacing: MOBILE_SPACING * 2 if app.ui_config.is_mobile else DESKTOP_SPACING * 2
+        
+        TitleLabel:
+            text: 'Food Allergy Database'
+            font_size: sp(28) if app.ui_config.is_mobile else sp(24)
+            height: dp(110) if app.ui_config.is_mobile else dp(80)
+            halign: 'center'
+        
+        PrimaryButton:
+            text: 'Add New Allergy'
+            height: dp(80) if app.ui_config.is_mobile else dp(60)
+            font_size: sp(18) if app.ui_config.is_mobile else sp(16)
+            on_press: root.go_to_add()
+        
+        PrimaryButton:
+            text: 'View All Allergies'
+            height: dp(80) if app.ui_config.is_mobile else dp(60)
+            font_size: sp(18) if app.ui_config.is_mobile else sp(16)
+            on_press: root.go_to_list()
+        
+        PrimaryButton:
+            text: 'Search Ingredients'
+            height: dp(80) if app.ui_config.is_mobile else dp(60)
+            font_size: sp(18) if app.ui_config.is_mobile else sp(16)
+            on_press: root.go_to_search()
+        
+        DangerButton:
+            text: 'Exit'
+            height: dp(80) if app.ui_config.is_mobile else dp(60)
+            font_size: sp(18) if app.ui_config.is_mobile else sp(16)
+            on_press: root.exit_app()
+
+# Allergy Entry Screen
+<AllergyEntryScreen>:
+    on_kv_post: root.on_kv_post()
+    BoxLayout:
+        orientation: 'vertical'
+        padding: MOBILE_PADDING if app.ui_config.is_mobile else DESKTOP_PADDING
+        spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+        
+        TitleLabel:
+            text: 'Add New Allergy'
+            halign: 'center'
+        
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+                size_hint_y: None
+                height: self.minimum_height
+                
+                # Main form using responsive grid
+                GridLayout:
+                    cols: 1 if app.ui_config.is_mobile else 2
+                    spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+                    size_hint_y: None
+                    height: self.minimum_height
+                    
+                    CommonLabel:
+                        text: 'Allergen Name:'
+                        size_hint_y: None
+                        height: dp(40)
+                    
+                    CommonTextInput:
+                        id: allergen_input
+                        multiline: False
+                    
+                    CommonLabel:
+                        text: 'Danger Level:'
+                        size_hint_y: None
+                        height: dp(40)
+                    
+                    Spinner:
+                        id: danger_spinner
+                        text: 'Select Level'
+                        values: ['1 - Mild', '2 - Moderate', '3 - Severe', '4 - Life-threatening']
+                        size_hint_y: None
+                        height: MOBILE_INPUT_HEIGHT if app.ui_config.is_mobile else DESKTOP_INPUT_HEIGHT
+                        font_size: sp(12)
+                
+                # Full-width text fields
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(5)
+                    size_hint_y: None
+                    height: dp(110)
+                    
+                    CommonLabel:
+                        text: 'Symptoms:'
+                        size_hint_y: None
+                        height: dp(30)
+                        halign: 'left'
+                    
+                    TextInput:
+                        id: symptoms_input
+                        multiline: True
+                        size_hint_y: None
+                        height: dp(80)
+                        font_size: sp(12)
+                
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(5)
+                    size_hint_y: None
+                    height: dp(110)
+                    
+                    CommonLabel:
+                        text: 'Common Ingredients:'
+                        size_hint_y: None
+                        height: dp(30)
+                        halign: 'left'
+                    
+                    TextInput:
+                        id: ingredients_input
+                        multiline: True
+                        size_hint_y: None
+                        height: dp(80)
+                        font_size: sp(12)
+                
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(5)
+                    size_hint_y: None
+                    height: dp(110)
+                    
+                    CommonLabel:
+                        text: 'Additional Notes:'
+                        size_hint_y: None
+                        height: dp(30)
+                        halign: 'left'
+                    
+                    TextInput:
+                        id: notes_input
+                        multiline: True
+                        size_hint_y: None
+                        height: dp(80)
+                        font_size: sp(12)
+        
+        # Button layout - responsive
+        BoxLayout:
+            orientation: 'vertical' if app.ui_config.is_mobile else 'horizontal'
+            size_hint_y: None
+            height: dp(200) if app.ui_config.is_mobile else dp(60)
+            spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+            
+            SuccessButton:
+                text: 'Add Allergy'
+                on_press: root.add_allergy()
+            
+            SecondaryButton:
+                text: 'Clear Form'
+                on_press: root.clear_form()
+            
+            SecondaryButton:
+                text: 'Back to Main'
+                on_press: root.go_back()
+
+# Allergy List Screen
+<AllergyListScreen>:
+    on_kv_post: root.on_kv_post()
+    BoxLayout:
+        orientation: 'vertical'
+        padding: MOBILE_PADDING if app.ui_config.is_mobile else DESKTOP_PADDING
+        spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+        
+        # Header
+        BoxLayout:
+            orientation: 'vertical' if app.ui_config.is_mobile else 'horizontal'
+            size_hint_y: None
+            height: dp(140) if app.ui_config.is_mobile else dp(60)
+            spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+            
+            TitleLabel:
+                text: 'Allergy Database'
+                size_hint_y: None
+                height: dp(80) if app.ui_config.is_mobile else dp(60)
+            
+            BoxLayout:
+                size_hint_y: None
+                height: dp(60)
+                spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+                size_hint_x: None if not app.ui_config.is_mobile else 1
+                width: dp(220) if not app.ui_config.is_mobile else 0
+                
+                SecondaryButton:
+                    text: 'Refresh'
+                    size_hint_x: None
+                    width: dp(100)
+                    on_press: root.refresh_list()
+                
+                SecondaryButton:
+                    text: 'Back'
+                    size_hint_x: None
+                    width: dp(100)
+                    on_press: root.go_back()
+        
+        ScrollView:
+            BoxLayout:
+                id: list_layout
+                orientation: 'vertical'
+                spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+                size_hint_y: None
+                height: self.minimum_height
+
+# Search Screen
+<SearchScreen>:
+    on_kv_post: root.on_kv_post()
+    BoxLayout:
+        orientation: 'vertical'
+        padding: MOBILE_PADDING if app.ui_config.is_mobile else DESKTOP_PADDING
+        spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+        
+        TitleLabel:
+            text: 'Search Allergies'
+            halign: 'center'
+        
+        # Search layout
+        BoxLayout:
+            orientation: 'vertical' if app.ui_config.is_mobile else 'horizontal'
+            size_hint_y: None
+            height: dp(120) if app.ui_config.is_mobile else dp(50)
+            spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+            
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+                
+                CommonLabel:
+                    text: 'Search:'
+                    size_hint_x: None
+                    width: dp(80)
+                
+                CommonTextInput:
+                    id: search_input
+                    multiline: False
+                    hint_text: 'Enter allergen name or ingredient...'
+                    on_text: root.on_search_text_change(self, self.text)
+            
+            BoxLayout:
+                size_hint_y: None
+                height: dp(60)
+                spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+                size_hint_x: None if not app.ui_config.is_mobile else 1
+                width: dp(220) if not app.ui_config.is_mobile else 0
+                
+                PrimaryButton:
+                    text: 'Search'
+                    size_hint_x: None
+                    width: dp(100)
+                    on_press: root.search_allergies()
+                
+                SecondaryButton:
+                    text: 'Back'
+                    size_hint_x: None
+                    width: dp(100)
+                    on_press: root.go_back()
+        
+        CommonLabel:
+            id: results_label
+            text: 'Enter search term above'
+            size_hint_y: None
+            height: dp(30)
+            halign: 'center'
+        
+        ScrollView:
+            BoxLayout:
+                id: results_layout
+                orientation: 'vertical'
+                spacing: MOBILE_SPACING if app.ui_config.is_mobile else DESKTOP_SPACING
+                size_hint_y: None
+                height: self.minimum_height
