@@ -46,7 +46,7 @@ jobs:
             buildozer-debug-${{ runner.os }}-
 
       - name: Build debug APK
-        run: buildozer android debug
+        run: buildozer --verbose android debug
 
       - name: List build outputs (debug)
         if: success()
