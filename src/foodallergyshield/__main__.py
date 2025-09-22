@@ -1,12 +1,12 @@
 """
 The main entry point for the Food Allergy Shield application.
 """
-# Import from the local package
+# Import from the app module which now contains the main application
 try:
-    from .food_allergy_shield import AllergyDatabaseApp
+    from .app import AllergyDatabaseApp
 except ImportError:
     # Fallback import if relative import fails
-    from food_allergy_shield import AllergyDatabaseApp
+    from app import AllergyDatabaseApp
 
 
 def main():
@@ -18,4 +18,5 @@ def main():
 
 if __name__ == '__main__':
     app = main()
+    app.run()
     app.run()
