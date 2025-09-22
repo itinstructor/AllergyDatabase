@@ -1,0 +1,65 @@
+[build-system]
+requires = ["briefcase>=0.3.18"]
+
+[project]
+name = "foodallergyshield"
+dynamic = ["version"]
+description = "A simple cross-platform application for managing food allergy information"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "WNCC Education", email = "education@wncc.org"},
+]
+requires-python = ">=3.8"
+dependencies = [
+    "kivy>=2.3.0",
+]
+
+[tool.briefcase]
+project_name = "Food Allergy Shield"
+bundle = "com.wncc.foodallergyshield"
+version = "1.0.0"
+url = "https://github.com/itinstructor/FoodAllergyShield"
+author = "WNCC Education"
+author_email = "education@wncc.org"
+
+[tool.briefcase.app.foodallergyshield]
+formal_name = "Food Allergy Shield"
+description = "A simple cross-platform application for managing food allergy information"
+long_description = """A Kivy-based desktop application for managing food allergy information. 
+Store, search, and organize allergy data including allergen names, danger levels, symptoms, and ingredients to avoid."""
+icon = "assets/icon"
+sources = ["src/foodallergyshield"]
+
+requires = [
+    "kivy>=2.3.0",
+]
+
+# Console app for debugging
+console_app = false
+
+# Include additional Python files in the app bundle
+[tool.briefcase.app.foodallergyshield.resources]
+"assets/icon.ico" = "icon.ico"
+"data/sample_data.csv" = "sample_data.csv"
+"data/food_allergies.db" = "food_allergies.db"
+
+[tool.briefcase.app.foodallergyshield.windows]
+requires = [
+    "kivy>=2.3.0",
+]
+
+[tool.briefcase.app.foodallergyshield.macOS]
+requires = [
+    "kivy>=2.3.0",
+]
+
+[tool.briefcase.app.foodallergyshield.linux]
+requires = [
+    "kivy>=2.3.0",
+]
+
+[tool.briefcase.app.foodallergyshield.android]
+requires = [
+    "kivy>=2.3.0",
+]
