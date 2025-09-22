@@ -46,6 +46,8 @@ jobs:
             buildozer-debug-${{ runner.os }}-
 
       - name: Build debug APK
+        env:
+          ANDROID_ACCEPT_SDK_LICENSE: "true"
         run: buildozer --verbose android debug
 
       - name: List build outputs (debug)
@@ -115,6 +117,7 @@ jobs:
 
       - name: Build release AAB
         env:
+          ANDROID_ACCEPT_SDK_LICENSE: "true"
           ANDROID_KEYSTORE: release.keystore
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
