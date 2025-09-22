@@ -21,31 +21,31 @@ source.include_exts = py,png,jpg,kv,atlas,txt,db,csv
 # (str) Application versioning
 version = 0.1
 # Android version code (increment for each Play Store release)
-android.version_code = .01
+android.version_code = 1
 # Version name used for release tagging
 package.version = 0.1.0
 
 # (list) Application requirements
 ## Pin a compatible Python version and Kivy. sqlite3 is included in Python's stdlib
-requirements = python3==3.11,kivy==2.3.1
+requirements = python3,kivy==2.3.0
 
 # (str) Android app theme
 android.theme = "@android:style/Theme.NoTitleBar"
 
 # (int) Android API to use
-android.api = 33
+android.api = 31
 
 # (int) Minimum API required
 android.minapi = 21
 
 # (str) Android NDK version to use
-android.ndk = 25b
+android.ndk = 23c
 
 # (str) Android SDK version to use
-android.sdk = 33
+android.sdk = 31
 
 # (str) Android build tools version to use
-android.build_tools = 34.0.0
+android.build_tools = 31.0.0
 
 # (bool) Enable AndroidX support
 android.enable_androidx = True
@@ -87,3 +87,24 @@ android.accept_all_sdk_licenses = True
 
 # (str) Override the default android directory (optional)
 # android.p4a_dir = ~/my-p4a-clone
+
+# (str) python-for-android fork to use (optional)
+p4a.fork = kivy
+
+# (str) python-for-android branch to use (optional)
+p4a.branch = develop
+
+# (str) python-for-android git url (if not fork)
+# p4a.url = https://github.com/kivy/python-for-android.git
+
+# (bool) Whether to use --private data storage
+# android.private_storage = True
+
+# (str) Android logcat filters to use
+# android.logcat_filters = *:S python:D
+
+# (bool) Copy library instead of making a libpymodules.so
+android.copy_libs = 1
+
+# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
+android.archs = arm64-v8a, armeabi-v7a
