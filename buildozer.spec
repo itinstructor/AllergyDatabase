@@ -33,19 +33,21 @@ requirements = python3,kivy==2.3.0
 android.theme = "@android:style/Theme.NoTitleBar"
 
 # (int) Android API to use
-android.api = 31
+android.api = 33
 
 # (int) Minimum API required
 android.minapi = 21
 
 # (str) Android NDK version to use
-android.ndk = 23c
+android.ndk = 25b
+# Alternative: use latest available NDK
+# android.ndk = 27c
 
 # (str) Android SDK version to use
-android.sdk = 31
+android.sdk = 33
 
 # (str) Android build tools version to use
-android.build_tools = 31.0.0
+android.build_tools = 33.0.2
 
 # (bool) Enable AndroidX support
 android.enable_androidx = True
