@@ -76,8 +76,9 @@ How the UI and database connect
 
 """
 
-import sqlite3  # standard library for SQLite databases (not used directly here anymore)
-import os  # standard library for operating system utilities (used in tests)
+import csv
+import os  # standard library for operating system utilities
+import sqlite3  # standard library for SQLite databases
 
 # Kivy imports: these provide UI widgets and app lifecycle functions
 from kivy.app import App
@@ -94,6 +95,11 @@ from kivy.utils import (
 )  # helps detect running platform (android, win, etc.)
 from kivy.lang import Builder  # used to load the .kv UI file
 from kivy.properties import BooleanProperty  # reactive property used by KV
+from kivy.graphics import Color, RoundedRectangle
+from kivy.uix.checkbox import CheckBox
+from kivy.uix.filechooser import FileChooserListView
+from kivy.uix.spinner import Spinner
+from kivy.uix.textinput import TextInput
 
 # Import the refactored DatabaseManager from its own module. This keeps
 # database code separate from UI code so it's easier to test and maintain.
@@ -160,17 +166,6 @@ class UIConfig:
 class DatabaseMaintenanceScreen(Screen):
 
     def export_csv(self):
-        from kivy.uix.boxlayout import BoxLayout
-        from kivy.uix.filechooser import FileChooserListView
-        from kivy.uix.button import Button
-        from kivy.uix.label import Label
-        from kivy.uix.textinput import TextInput
-        from kivy.uix.popup import Popup
-        from kivy.metrics import dp
-        from kivy.uix.checkbox import CheckBox
-        import csv
-        import os as _os
-
         app = App.get_running_app()  # type: ignore[attr-defined]
 
         # Layout: [filename row], [buttons]
@@ -218,7 +213,7 @@ class DatabaseMaintenanceScreen(Screen):
                 return
             if not filename.lower().endswith(".csv"):
                 filename += ".csv"
-            export_file = _os.path.join(_os.getcwd(), filename)
+            export_file = os.path.join(os.getcwd(), filename)
             try:
                 allergies = app.db_manager.get_all_allergies()
                 headers = [
@@ -282,11 +277,6 @@ def build_allergy_row(
     Returns:
         BoxLayout: Fully configured container.
     """
-    from kivy.uix.boxlayout import BoxLayout
-    from kivy.uix.label import Label
-    from kivy.uix.button import Button
-    from kivy.graphics import Color, RoundedRectangle
-
     (
         allergy_id,
         name,
@@ -443,9 +433,7 @@ def build_allergy_row(
     full_text = "\n".join(parts_full)
     preview_text = parts_full[0]
 
-    from kivy.uix.label import Label as _Lbl
-
-    details_label = _Lbl(
+    details_label = Label(
         text=preview_text,
         font_size=body_font,
         halign="left",
@@ -483,21 +471,9 @@ def build_allergy_row(
     """Screen for database maintenance actions (import, export, etc.)"""
 
     def open_import_dialog(self):
-        from kivy.uix.boxlayout import BoxLayout
-        from kivy.uix.filechooser import FileChooserListView
-        from kivy.uix.spinner import Spinner
-        from kivy.uix.button import Button
-        from kivy.uix.label import Label
-        from kivy.uix.popup import Popup
-        from kivy.metrics import dp
-
         app = App.get_running_app()  # type: ignore[attr-defined]
-        import os as _os
-
-        content = BoxLayout(
-            orientation="vertical", spacing=dp(10), padding=dp(10)
-        )
-        start_path = _os.getcwd()
+        content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(10))
+        start_path = os.getcwd()
         filechooser = FileChooserListView(path=start_path, size_hint=(1, 0.75))
         filechooser.filters = []
         content.add_widget(filechooser)
@@ -799,24 +775,12 @@ class AllergyEntryScreen(Screen):
         buttons. When the user confirms, the CSV is passed to
         DatabaseManager.import_from_csv() and a brief summary popup is shown.
         """
-        from kivy.uix.boxlayout import BoxLayout
-        from kivy.uix.filechooser import FileChooserListView
-        from kivy.uix.spinner import Spinner
-        from kivy.uix.button import Button
-        from kivy.uix.label import Label
-        from kivy.uix.popup import Popup
-
         app = App.get_running_app()
 
-        import os as _os
-
-        # Build the popup content
-        content = BoxLayout(
-            orientation="vertical", spacing=dp(10), padding=dp(10)
-        )
+        content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(10))
 
         # Start in the current working directory so folders are visible on Windows
-        start_path = _os.getcwd()
+        start_path = os.getcwd()
         filechooser = FileChooserListView(path=start_path, size_hint=(1, 0.75))
         # Avoid aggressive filters that can hide folders on some platforms
         # Use an empty list for no filters (FileChooser doesn't accept None)
@@ -957,15 +921,9 @@ class AllergyListScreen(Screen):
         buttons. When the user confirms, the CSV is passed to
         DatabaseManager.import_from_csv() and a brief summary popup is shown.
         """
-        from kivy.uix.boxlayout import BoxLayout
-        from kivy.uix.filechooser import FileChooserListView
-        from kivy.uix.spinner import Spinner
-
         app = App.get_running_app()
 
-        content = BoxLayout(
-            orientation="vertical", spacing=dp(10), padding=dp(10)
-        )
+        content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(10))
         filechooser = FileChooserListView(
             path=".", filters=["*.csv"], size_hint_y=0.8
         )
