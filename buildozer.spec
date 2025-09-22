@@ -43,8 +43,17 @@ android.minapi = 21
 # (str) Android NDK version to use
 android.ndk = 25b
 
+# (str) Android SDK version to use
+android.sdk = 31
+
+# (str) Android build tools version to use
+android.build_tools = 34.0.0
+
 # (bool) Enable AndroidX support
 android.enable_androidx = True
+
+# (bool) Automatically accept SDK licenses
+android.accept_sdk_license = True
 
 # (list) Permissions
 ## Common runtime permissions; add more if your app needs them.
@@ -71,3 +80,15 @@ presplash.filename = presplash.png
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
 log_level = 2
+
+# (str) Path to build directory (optional, defaults to ./bin)
+# bin_dir = ./bin
+
+# (str) Path to buildozer temporary directory (optional, defaults to ./.buildozer)
+# cache_dir = ./.buildozer
+
+# (bool) Automatically accept all Android SDK licenses
+android.accept_all_sdk_licenses = True
+
+# (str) Override the default android directory (optional)
+# android.p4a_dir = ~/my-p4a-clone
