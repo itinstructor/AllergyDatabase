@@ -1,5 +1,6 @@
-# Food Allergy Database (Kivy)
+# FoodSafe (Kivy)
 
+Benny the Bite 
 A small cross-platform Kivy application to store food allergies in a local SQLite database, rate danger levels, and search ingredients.
 
 Repository contents
