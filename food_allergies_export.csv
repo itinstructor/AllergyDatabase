@@ -1,0 +1,93 @@
+id,allergen_name,danger_level,symptoms,ingredients,source,notes,created_date
+1,Peanuts,4,"Anaphylaxis, difficulty breathing, swelling of face and throat, hives, rapid pulse","Peanut oil, peanut flour, peanut butter, groundnuts, arachis oil, mixed nuts",,Carry EpiPen at all times. Avoid all products processed in facilities that handle peanuts.,2025-09-21 20:04:03
+4,Tree Nuts,4,"Anaphylaxis, swelling, difficulty breathing, skin reactions","Almonds, walnuts, pecans, cashews, pistachios, brazil nuts, hazelnuts, macadamia nuts",,Different tree nuts may cause different severities. Some people allergic to only specific nuts.,2025-09-21 20:04:03
+61,Clam,3,"Hives, swelling, anaphylaxis","Clams, clam chowder, seafood mixes",,Shellfish family.,2025-09-21 20:19:03
+58,Crab,3,"Hives, swelling, anaphylaxis","Crab, crab cakes, seafood mixes",,Shellfish family.,2025-09-21 20:19:02
+8,Fish,3,"Hives, swelling, gastrointestinal problems, respiratory issues","Salmon, tuna, cod, halibut, anchovies, fish sauce, worcestershire sauce",,May be allergic to specific types of fish only. Cross-contamination risk in restaurants.,2025-09-21 20:04:03
+59,Lobster,3,"Hives, swelling, anaphylaxis","Lobster, lobster bisque, seafood mixes",,Shellfish family.,2025-09-21 20:19:03
+14,Mollusks,3,"Hives, swelling, anaphylaxis, digestive symptoms","Snails, clams, oysters, squid, octopus, scallops",,Common in Mediterranean diets. Not always labeled.,2025-09-21 20:18:59
+64,Octopus,3,"Hives, swelling, anaphylaxis","Octopus, seafood mixes",,Shellfish family.,2025-09-21 20:19:03
+62,Oyster,3,"Hives, swelling, anaphylaxis","Oysters, oyster sauce, seafood mixes",,Shellfish family.,2025-09-21 20:19:03
+65,Scallop,3,"Hives, swelling, anaphylaxis","Scallops, seafood mixes",,Shellfish family.,2025-09-21 20:19:03
+9,Sesame,3,"Anaphylaxis, hives, difficulty breathing, gastrointestinal symptoms","Sesame seeds, tahini, sesame oil, hummus, halva, some bread toppings",,Increasingly recognized allergen. Now required to be labeled in many countries.,2025-09-21 20:04:03
+3,Shellfish,3,"Hives, vomiting, difficulty swallowing, abdominal pain, dizziness","Shrimp, crab, lobster, crawfish, mollusks, oysters, clams, mussels",,Cross-contamination risk high in seafood restaurants. Often develops in adulthood.,2025-09-21 20:04:03
+60,Shrimp,3,"Hives, swelling, anaphylaxis","Shrimp, prawns, seafood mixes",,Shellfish family.,2025-09-21 20:19:03
+63,Squid,3,"Hives, swelling, anaphylaxis","Squid, calamari, seafood mixes",,Shellfish family.,2025-09-21 20:19:03
+53,Almond,2,"Hives, anaphylaxis","Almonds, marzipan, almond milk, nut mixes",,Tree nut.,2025-09-21 20:19:02
+52,Brazil Nut,2,"Hives, anaphylaxis","Brazil nuts, nut mixes, desserts",,Tree nut.,2025-09-21 20:19:02
+50,Cashew,2,"Hives, anaphylaxis","Cashews, nut butters, nut mixes",,Tree nut.,2025-09-21 20:19:02
+12,Celery,2,"Oral allergy syndrome, anaphylaxis, skin reactions","Celery root, celery salt, celery stalks, soups, spice mixes",,Common in Europe. Can cause severe reactions.,2025-09-21 20:18:59
+5,Eggs,2,"Skin rash, stomach upset, respiratory problems, runny nose","Albumin, egg whites, egg yolks, mayonnaise, meringue, custard, lecithin",,Often outgrown by adolescence. Some people can tolerate baked eggs but not raw.,2025-09-21 20:04:03
+47,Hazelnut,2,"Itchy mouth, hives, oral allergy syndrome","Hazelnuts, chocolate spreads, praline",,Tree nut. Cross-reacts with birch pollen.,2025-09-21 20:19:02
+13,Lupin,2,"Hives, stomach upset, anaphylaxis","Lupin flour, lupin beans, gluten-free products",,Legume family. Increasingly used in gluten-free foods.,2025-09-21 20:18:59
+46,Macadamia Nut,2,"Hives, anaphylaxis","Macadamia nuts, cookies, nut mixes",,Tree nut.,2025-09-21 20:19:02
+2,Milk,2,"Stomach pain, bloating, diarrhea, nausea, gas","Lactose, casein, whey, butter, cream, cheese, yogurt, milk powder",,Lactose-free alternatives available. Severity varies with amount consumed.,2025-09-21 20:04:03
+11,Mustard,2,"Hives, itching, swelling, difficulty breathing","Mustard seeds, mustard powder, prepared mustard, salad dressings",,Common in Europe and Canada. Can cause severe reactions.,2025-09-21 20:18:59
+48,Pecan,2,"Hives, anaphylaxis","Pecans, pies, nut mixes",,Tree nut.,2025-09-21 20:19:02
+51,Pistachio,2,"Hives, anaphylaxis","Pistachios, nut mixes, desserts",,Tree nut.,2025-09-21 20:19:02
+66,Snail,2,"Hives, swelling, anaphylaxis","Escargot, snail dishes",,Mollusk family.,2025-09-21 20:19:03
+49,Walnut,2,"Hives, anaphylaxis","Walnuts, brownies, nut mixes",,Tree nut.,2025-09-21 20:19:02
+7,Wheat,2,"Digestive issues, skin problems, respiratory symptoms, headache","Wheat flour, gluten, bread, pasta, cereals, crackers, beer",,Different from celiac disease. May be able to tolerate other grains like rice and corn.,2025-09-21 20:04:03
+91,Allspice,1,"Hives, oral allergy syndrome","Allspice, spice mixes, baked goods",,Spice allergy.,2025-09-21 20:19:05
+18,Apple,1,"Itchy mouth, throat, mild swelling, oral allergy syndrome","Raw apples, apple juice, cider, apple sauce",,Often related to birch pollen allergy. Cooked apples usually tolerated.,2025-09-21 20:19:00
+35,Apricot,1,"Itchy mouth, oral allergy syndrome","Fresh apricot, dried apricot, jam",,Rosaceae family.,2025-09-21 20:19:01
+20,Avocado,1,"Itchy mouth, swelling, stomach upset, oral allergy syndrome","Avocado, guacamole, sushi rolls",,Latex-fruit syndrome. Cross-reacts with banana and chestnut.,2025-09-21 20:19:00
+16,Banana,1,"Itchy mouth, swelling lips, oral allergy syndrome","Banana, banana chips, smoothies",,Latex-fruit syndrome possible. Related to birch pollen.,2025-09-21 20:18:59
+55,Barley,1,"Hives, stomach upset, oral allergy syndrome","Barley flour, beer, soups, cereals",,Contains gluten.,2025-09-21 20:19:02
+40,Bean,1,"Hives, stomach upset, anaphylaxis","Kidney beans, black beans, pinto beans, baked beans",,Legume family.,2025-09-21 20:19:01
+68,Beef,1,"Hives, stomach upset, oral allergy syndrome","Beef, steak, hamburgers, processed foods",,Rare but possible.,2025-09-21 20:19:03
+74,Bell Pepper,1,"Itchy mouth, oral allergy syndrome","Bell pepper, salads, stir fry",,Nightshade family.,2025-09-21 20:19:04
+86,Black Pepper,1,"Hives, oral allergy syndrome","Black pepper, spice mixes",,Spice allergy.,2025-09-21 20:19:04
+32,Blackberry,1,"Hives, oral allergy syndrome","Fresh blackberries, jams, desserts",,Rare but possible.,2025-09-21 20:19:01
+31,Blueberry,1,"Hives, stomach upset, oral allergy syndrome","Fresh blueberries, muffins, smoothies",,Rare but possible.,2025-09-21 20:19:00
+78,Broccoli,1,"Itchy mouth, oral allergy syndrome","Broccoli, salads, stir fry",,Rare but possible.,2025-09-21 20:19:04
+15,Buckwheat,1,"Skin rash, asthma, anaphylaxis","Buckwheat flour, soba noodles, pancakes",,Common in Asia. Not related to wheat.,2025-09-21 20:18:59
+90,Cardamom,1,"Hives, oral allergy syndrome","Cardamom, chai, spice mixes",,Spice allergy.,2025-09-21 20:19:05
+41,Carrot,1,"Itchy mouth, oral allergy syndrome","Raw carrot, carrot juice, salads",,Cross-reacts with birch pollen.,2025-09-21 20:19:01
+79,Cauliflower,1,"Itchy mouth, oral allergy syndrome","Cauliflower, salads, stir fry",,Rare but possible.,2025-09-21 20:19:04
+25,Cherry,1,"Itchy mouth, swelling, oral allergy syndrome","Fresh cherry, cherry pie, cherry juice",,Rosaceae family. Cross-reacts with birch pollen.,2025-09-21 20:19:00
+67,Chicken,1,"Hives, stomach upset, oral allergy syndrome","Chicken meat, chicken broth, processed foods",,Rare but possible.,2025-09-21 20:19:03
+38,Chickpea,1,"Hives, stomach upset, anaphylaxis","Hummus, falafel, chickpea flour, chana",,Legume family. Cross-reacts with peanut.,2025-09-21 20:19:01
+75,Chili Pepper,1,"Itchy mouth, oral allergy syndrome","Chili pepper, hot sauce, salsa",,Nightshade family.,2025-09-21 20:19:04
+84,Cinnamon,1,"Hives, oral allergy syndrome","Cinnamon, baked goods, spice mixes",,Spice allergy.,2025-09-21 20:19:04
+89,Clove,1,"Hives, oral allergy syndrome","Clove, spice mixes, baked goods",,Spice allergy.,2025-09-21 20:19:05
+36,Coconut,1,"Hives, stomach upset, anaphylaxis (rare)","Coconut milk, coconut oil, shredded coconut",,Tree nut family but rarely cross-reacts.,2025-09-21 20:19:01
+83,Coriander,1,"Hives, oral allergy syndrome","Coriander, cilantro, spice mixes",,Spice allergy.,2025-09-21 20:19:04
+21,Corn,1,"Hives, stomach upset, asthma, anaphylaxis (rare)","Corn syrup, corn starch, popcorn, tortillas, polenta",,Often mild. Corn is in many processed foods.,2025-09-21 20:19:00
+73,Cucumber,1,"Itchy mouth, oral allergy syndrome","Cucumber, salads, pickles",,Rare but possible.,2025-09-21 20:19:03
+71,Eggplant,1,"Itchy mouth, oral allergy syndrome","Eggplant, baba ganoush, ratatouille",,Nightshade family.,2025-09-21 20:19:03
+22,Garlic,1,"Digestive upset, hives, asthma, anaphylaxis (rare)","Garlic powder, fresh garlic, sauces, dressings",,Can be severe. Common in Mediterranean and Asian cuisine.,2025-09-21 20:19:00
+70,Gelatin,1,"Hives, stomach upset, oral allergy syndrome","Gelatin, marshmallows, gummy candies, capsules",,Derived from animal collagen.,2025-09-21 20:19:03
+87,Ginger,1,"Hives, oral allergy syndrome","Ginger, gingerbread, stir fry",,Spice allergy.,2025-09-21 20:19:04
+26,Grape,1,"Hives, stomach upset, oral allergy syndrome","Grapes, raisins, wine, grape juice",,Rare but possible. Sulfites in wine may worsen symptoms.,2025-09-21 20:19:00
+17,Kiwi,1,"Tingling mouth, swelling, hives, oral allergy syndrome","Kiwi fruit, fruit salads, juices",,Common in children. May cross-react with latex.,2025-09-21 20:18:59
+37,Lentil,1,"Hives, stomach upset, anaphylaxis","Lentil soup, dal, lentil flour",,Legume family. Common in Mediterranean and Indian diets.,2025-09-21 20:19:01
+77,Lettuce,1,"Itchy mouth, oral allergy syndrome","Lettuce, salads, sandwiches",,Rare but possible.,2025-09-21 20:19:04
+28,Mango,1,"Itchy mouth, swelling, hives, oral allergy syndrome","Mango, mango juice, chutney",,Related to poison ivy family. Skin contact may cause rash.,2025-09-21 20:19:00
+29,Melon,1,"Itchy mouth, swelling, oral allergy syndrome","Cantaloupe, honeydew, watermelon, fruit salads",,Cross-reacts with ragweed pollen.,2025-09-21 20:19:00
+80,Mushroom,1,"Hives, stomach upset, oral allergy syndrome","Mushrooms, pizza, stir fry",,Rare but possible.,2025-09-21 20:19:04
+88,Nutmeg,1,"Hives, oral allergy syndrome","Nutmeg, baked goods, spice mixes",,Spice allergy.,2025-09-21 20:19:05
+54,Oat,1,"Hives, stomach upset, oral allergy syndrome","Oatmeal, granola, oat milk, cookies",,Gluten-free but can be cross-contaminated.,2025-09-21 20:19:02
+23,Onion,1,"Stomach upset, hives, oral allergy syndrome","Raw onion, onion powder, soups, salads",,Often mild. Related to pollen allergies.,2025-09-21 20:19:00
+39,Pea,1,"Hives, stomach upset, anaphylaxis","Green peas, pea protein, split peas",,Legume family. Increasing in vegan foods.,2025-09-21 20:19:01
+24,Peach,1,"Itchy mouth, swelling, oral allergy syndrome","Fresh peach, canned peach, peach yogurt",,Rosaceae family. Cross-reacts with birch pollen.,2025-09-21 20:19:00
+33,Pear,1,"Itchy mouth, oral allergy syndrome","Fresh pear, canned pear, pear juice",,Rosaceae family.,2025-09-21 20:19:01
+81,Pine Nut,1,"Hives, oral allergy syndrome","Pine nuts, pesto, salads",,Tree nut.,2025-09-21 20:19:04
+27,Pineapple,1,"Mouth tingling, swelling, hives, digestive upset","Fresh pineapple, pineapple juice, fruit salads",,Bromelain enzyme may cause irritation.,2025-09-21 20:19:00
+34,Plum,1,"Itchy mouth, oral allergy syndrome","Fresh plum, prunes, plum jam",,Rosaceae family.,2025-09-21 20:19:01
+44,Poppy Seed,1,"Hives, oral allergy syndrome","Poppy seeds, bagels, pastries",,Rare but possible.,2025-09-21 20:19:02
+69,Pork,1,"Hives, stomach upset, oral allergy syndrome","Pork, ham, bacon, sausages",,Rare but possible.,2025-09-21 20:19:03
+42,Potato,1,"Itchy mouth, hives, oral allergy syndrome","Raw potato, potato chips, mashed potatoes",,Nightshade family. Cooked potatoes usually tolerated.,2025-09-21 20:19:01
+45,Pumpkin Seed,1,"Hives, oral allergy syndrome","Pumpkin seeds, pepitas, granola",,Rare but possible.,2025-09-21 20:19:02
+57,Quinoa,1,"Hives, stomach upset, oral allergy syndrome","Quinoa, quinoa flour, salads",,Pseudo-grain. Rare but possible.,2025-09-21 20:19:02
+30,Raspberry,1,"Itchy mouth, hives, oral allergy syndrome","Fresh raspberries, jam, desserts",,Rosaceae family.,2025-09-21 20:19:00
+56,Rye,1,"Hives, stomach upset, oral allergy syndrome","Rye bread, rye flour, whiskey",,Contains gluten.,2025-09-21 20:19:02
+82,Saffron,1,"Hives, oral allergy syndrome","Saffron, paella, risotto",,Spice allergy. Rare.,2025-09-21 20:19:04
+6,Soy,1,"Mild stomach upset, skin irritation, runny nose","Soy sauce, tofu, tempeh, soy milk, soy protein, edamame, miso",,Common in processed foods. Often mild reactions. Check labels carefully.,2025-09-21 20:04:03
+76,Spinach,1,"Itchy mouth, oral allergy syndrome","Spinach, salads, cooked spinach",,Rare but possible.,2025-09-21 20:19:04
+10,Strawberries,1,"Oral allergy syndrome, mild hives, itchy mouth and throat","Fresh strawberries, strawberry flavoring, strawberry jam, smoothies",,Often part of oral allergy syndrome. May be related to birch pollen allergy.,2025-09-21 20:04:03
+43,Sunflower,1,"Hives, oral allergy syndrome","Sunflower seeds, sunflower oil, snacks",,Rare but possible.,2025-09-21 20:19:01
+19,Tomato,1,"Itchy mouth, hives, swelling, oral allergy syndrome","Raw tomatoes, tomato sauce, ketchup, pizza",,Nightshade family. May cross-react with grass pollen.,2025-09-21 20:19:00
+92,Turmeric,1,"Hives, oral allergy syndrome","Turmeric, curry, spice mixes",,Spice allergy.,2025-09-21 20:19:05
+85,Vanilla,1,"Hives, oral allergy syndrome","Vanilla extract, ice cream, desserts",,Spice allergy.,2025-09-21 20:19:04
+72,Zucchini,1,"Itchy mouth, oral allergy syndrome","Zucchini, squash, salads",,Rare but possible.,2025-09-21 20:19:03

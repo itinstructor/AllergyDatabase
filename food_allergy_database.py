@@ -78,7 +78,6 @@ How the UI and database connect
 
 import csv
 import os  # standard library for operating system utilities
-import sqlite3  # standard library for SQLite databases
 
 # Kivy imports: these provide UI widgets and app lifecycle functions
 from kivy.app import App
@@ -244,6 +243,95 @@ class DatabaseMaintenanceScreen(Screen):
         export_btn.bind(on_press=do_export)
         cancel_btn.bind(on_press=lambda x: popup.dismiss())
         popup.open()
+
+    def open_import_dialog(self):
+        """Open a dialog for importing CSV files into the database."""
+        app = App.get_running_app()  # type: ignore[attr-defined]
+        content = BoxLayout(
+            orientation="vertical", spacing=dp(10), padding=dp(10)
+        )
+        start_path = os.getcwd()
+        filechooser = FileChooserListView(path=start_path, size_hint=(1, 0.75))
+        filechooser.filters = []
+        content.add_widget(filechooser)
+        dup_row = BoxLayout(size_hint_y=None, height=dp(40), spacing=dp(10))
+        dup_row.add_widget(
+            Label(text="On duplicate:", size_hint_x=None, width=dp(110))
+        )
+        dup_spinner = Spinner(
+            text="skip",
+            values=("skip", "update"),
+            size_hint_x=None,
+            width=dp(120),
+        )
+        dup_row.add_widget(dup_spinner)
+        content.add_widget(dup_row)
+        btn_row = BoxLayout(size_hint_y=None, height=dp(50), spacing=dp(10))
+        import_btn = Button(
+            text="Import",
+            background_color=(0.3, 0.8, 0.3, 1),
+            size_hint_x=None,
+            width=dp(120),
+        )
+        cancel_btn = Button(
+            text="Cancel",
+            background_color=(0.7, 0.7, 0.7, 1),
+            size_hint_x=None,
+            width=dp(120),
+        )
+        btn_row.add_widget(import_btn)
+        btn_row.add_widget(cancel_btn)
+        content.add_widget(btn_row)
+        popup = Popup(title="Import CSV", content=content, size_hint=(0.9, 0.9))
+
+        def do_import(instance=None):
+            selected = filechooser.selection
+            if not selected:
+                self.show_popup("Error", "Please select a CSV file to import.")
+                return
+            file_path = selected[0]
+            on_dup = dup_spinner.text.strip().lower() or "skip"
+            summary = app.db_manager.import_from_csv(
+                file_path, on_duplicate=on_dup
+            )
+            popup.dismiss()
+            msg = f"Imported: {summary.get('imported',0)}\nUpdated: {summary.get('updated',0)}\nSkipped: {summary.get('skipped',0)}"
+            errors = summary.get("errors", [])
+            if errors:
+                msg += "\nErrors:\n" + "\n".join(errors[:10])
+            self.show_popup("Import Summary", msg, auto_dismiss=3)
+            try:
+                app.root.get_screen("allergy_list").refresh_list()
+            except Exception:
+                pass
+
+        filechooser.bind(
+            on_submit=lambda fc, selection, touch: (
+                do_import() if selection else None
+            )
+        )
+        import_btn.bind(on_press=do_import)
+        cancel_btn.bind(on_press=lambda x: popup.dismiss())
+        popup.open()
+
+    def go_back(self):
+        """Navigate back to the main screen."""
+        self.manager.current = "main"
+
+    def show_popup(self, title, message, auto_dismiss=None):
+        """Show a popup with a message."""
+        app = App.get_running_app()
+        popup_size = app.ui_config.get_popup_size()
+        popup = Popup(
+            title=title, content=Label(text=message), size_hint=popup_size
+        )
+        popup.open()
+        # Always auto-dismiss after N seconds if requested
+        if auto_dismiss:
+            try:
+                Clock.schedule_once(lambda dt: popup.dismiss(), auto_dismiss)
+            except Exception:
+                pass
 
 
 # ---------------------------------------------------------------------------
@@ -468,93 +556,11 @@ def build_allergy_row(
 
     container.height = header_h + dp(50)
     return container
-    """Screen for database maintenance actions (import, export, etc.)"""
-
-    def open_import_dialog(self):
-        app = App.get_running_app()  # type: ignore[attr-defined]
-        content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(10))
-        start_path = os.getcwd()
-        filechooser = FileChooserListView(path=start_path, size_hint=(1, 0.75))
-        filechooser.filters = []
-        content.add_widget(filechooser)
-        dup_row = BoxLayout(size_hint_y=None, height=dp(40), spacing=dp(10))
-        dup_row.add_widget(
-            Label(text="On duplicate:", size_hint_x=None, width=dp(110))
-        )
-        dup_spinner = Spinner(
-            text="skip",
-            values=("skip", "update"),
-            size_hint_x=None,
-            width=dp(120),
-        )
-        dup_row.add_widget(dup_spinner)
-        content.add_widget(dup_row)
-        btn_row = BoxLayout(size_hint_y=None, height=dp(50), spacing=dp(10))
-        import_btn = Button(
-            text="Import",
-            background_color=(0.3, 0.8, 0.3, 1),
-            size_hint_x=None,
-            width=dp(120),
-        )
-        cancel_btn = Button(
-            text="Cancel",
-            background_color=(0.7, 0.7, 0.7, 1),
-            size_hint_x=None,
-            width=dp(120),
-        )
-        btn_row.add_widget(import_btn)
-        btn_row.add_widget(cancel_btn)
-        content.add_widget(btn_row)
-        popup = Popup(title="Import CSV", content=content, size_hint=(0.9, 0.9))
-
-        def do_import(instance=None):
-            selected = filechooser.selection
-            if not selected:
-                self.show_popup("Error", "Please select a CSV file to import.")
-                return
-            file_path = selected[0]
-            on_dup = dup_spinner.text.strip().lower() or "skip"
-            summary = app.db_manager.import_from_csv(
-                file_path, on_duplicate=on_dup
-            )
-            popup.dismiss()
-            msg = f"Imported: {summary.get('imported',0)}\nUpdated: {summary.get('updated',0)}\nSkipped: {summary.get('skipped',0)}"
-            errors = summary.get("errors", [])
-            if errors:
-                msg += "\nErrors:\n" + "\n".join(errors[:10])
-            self.show_popup("Import Summary", msg, auto_dismiss=3)
-            try:
-                app.root.get_screen("allergy_list").refresh_list()
-            except Exception:
-                pass
-
-        filechooser.bind(
-            on_submit=lambda fc, selection, touch: (
-                do_import() if selection else None
-            )
-        )
-        import_btn.bind(on_press=do_import)
-        cancel_btn.bind(on_press=lambda x: popup.dismiss())
-        popup.open()
-
-    def go_back(self):
-        self.manager.current = "main"
-
-    def show_popup(self, title, message, auto_dismiss=None):
-        app = App.get_running_app()
-        popup_size = app.ui_config.get_popup_size()
-        popup = Popup(
-            title=title, content=Label(text=message), size_hint=popup_size
-        )
-        popup.open()
-        # Always auto-dismiss after N seconds if requested
-        if auto_dismiss:
-            try:
-                Clock.schedule_once(lambda dt: popup.dismiss(), auto_dismiss)
-            except Exception:
-                pass
 
 
+# ---------------------------------------------------------------------------
+# AllergyEntryScreen — handles adding and editing allergies
+# ---------------------------------------------------------------------------
 class AllergyEntryScreen(Screen):
     """Screen for adding new allergy entries"""
 
@@ -777,7 +783,9 @@ class AllergyEntryScreen(Screen):
         """
         app = App.get_running_app()
 
-        content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(10))
+        content = BoxLayout(
+            orientation="vertical", spacing=dp(10), padding=dp(10)
+        )
 
         # Start in the current working directory so folders are visible on Windows
         start_path = os.getcwd()
@@ -923,7 +931,9 @@ class AllergyListScreen(Screen):
         """
         app = App.get_running_app()
 
-        content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(10))
+        content = BoxLayout(
+            orientation="vertical", spacing=dp(10), padding=dp(10)
+        )
         filechooser = FileChooserListView(
             path=".", filters=["*.csv"], size_hint_y=0.8
         )
@@ -1335,7 +1345,7 @@ class AllergyDatabaseApp(App):
     def build(self):
         self.ui_config = UIConfig()
         self.db_manager = DatabaseManager()
-        Builder.load_file("allergy_database.kv")
+        Builder.load_file("food_allergy_database.kv")
         sm = ScreenManager()
         sm.add_widget(MainScreen(name="main"))
         sm.add_widget(AllergyEntryScreen(name="add_allergy"))

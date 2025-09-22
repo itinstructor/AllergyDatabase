@@ -15,7 +15,7 @@ class DatabaseManager:
     so they are easy to test and teach in a classroom setting.
     """
 
-    def __init__(self, db_name="allergies.db"):
+    def __init__(self, db_name="food_allergies.db"):
         self.db_name = db_name
         self.init_database()
 
