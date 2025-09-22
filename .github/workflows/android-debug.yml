@@ -45,12 +45,6 @@ jobs:
           restore-keys: |
             buildozer-debug-${{ runner.os }}-
 
-      - name: Verify buildozer.spec exists (Debug)
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "Listing files:"
-          ls -la
-
       - name: Build debug APK
         run: buildozer --verbose android debug
 
@@ -118,12 +112,6 @@ jobs:
           else
             echo "No keystore provided; aborting"; exit 1
           fi
-
-      - name: Verify buildozer.spec exists (Release)
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "Listing files:"
-          ls -la
 
       - name: Build release AAB
         env:
