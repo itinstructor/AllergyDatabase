@@ -27,7 +27,10 @@ package.version = 0.1.0
 
 # (list) Application requirements
 ## Pin a compatible Python version and Kivy. sqlite3 is included in Python's stdlib
-requirements = python3,kivy==2.3.0
+requirements = python3,kivy
+
+# (str) Bootstrap to use for android builds
+android.bootstrap = sdl2
 
 # (str) Android app theme
 android.theme = "@android:style/Theme.NoTitleBar"
@@ -42,9 +45,6 @@ android.minapi = 21
 android.ndk = 25b
 # Alternative: use latest available NDK
 # android.ndk = 27c
-
-# (str) Android SDK version to use
-android.sdk = 33
 
 # (str) Android build tools version to use
 android.build_tools = 33.0.2
@@ -109,4 +109,4 @@ p4a.branch = develop
 android.copy_libs = 1
 
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
