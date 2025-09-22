@@ -1345,7 +1345,7 @@ class AllergyDatabaseApp(App):
     def build(self):
         self.ui_config = UIConfig()
         self.db_manager = DatabaseManager()
-        Builder.load_file("food_allergy_database.kv")
+        Builder.load_file("food_allergy_shield.kv")
         sm = ScreenManager()
         sm.add_widget(MainScreen(name="main"))
         sm.add_widget(AllergyEntryScreen(name="add_allergy"))

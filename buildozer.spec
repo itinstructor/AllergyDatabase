@@ -1,29 +1,29 @@
 [app]
 
 # (str) Title of your application
-title = Food Allergy Database
+title = Food Allergy Shield
 
 # (str) Package name
-package.name = allergydatabase
+package.name = foodallergyshield
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.wncc.allergydatabase
+package.domain = com.billthecomputerguy.foodallergyshield
 
 # (str) Source code where the main.py lives
 source.dir = .
 
 # (str) Main module to start from
-source.main = allergy_database.py
+source.main = food_allergy_shield.py
 
 # (list) Patterns to match files or directories to include
 source.include_exts = py,png,jpg,kv,atlas,txt,db,csv
 
 # (str) Application versioning
-version = 1.0
+version = 0.1
 # Android version code (increment for each Play Store release)
-android.version_code = 1
+android.version_code = .01
 # Version name used for release tagging
-package.version = 1.0.0
+package.version = 0.1.0
 
 # (list) Application requirements
 ## Pin a compatible Python version and Kivy. sqlite3 is included in Python's stdlib
