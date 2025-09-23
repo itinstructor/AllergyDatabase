@@ -100,7 +100,6 @@ Files of interest:
 
 import csv
 import os
-import sys
 from pathlib import Path
 
 # Kivy imports: these provide UI widgets and app lifecycle functions
@@ -1398,7 +1397,7 @@ class AllergyDatabaseApp(App):
             Sets the window title on supported desktop platforms.
         """
         if hasattr(Window, "set_title"):
-            Window.set_title("Food Allergy Database")
+            Window.set_title("Food Allergy Shield")
 
     def on_pause(self):
         """Called when the app is paused (Android).

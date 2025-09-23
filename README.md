@@ -111,7 +111,7 @@ pip install briefcase  # For packaging
 
 ### Key Files
 
-- `src/foodallergyshield/food_allergy_shield.py` - Main application logic
+- `src/foodallergyshield/app.py` - Main application logic
 - `src/foodallergyshield/database_manager.py` - Database operations
 - `src/foodallergyshield/food_allergy_shield.kv` - UI layout
 - `pyproject.toml` - Briefcase configuration
@@ -119,16 +119,11 @@ pip install briefcase  # For packaging
 ## 📦 Distribution
 
 The project creates:
+
 - **Windows**: `Food Allergy Shield-1.0.0.msi` installer
 - **Executable**: `Food Allergy Shield.exe` standalone
 
 ## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **Import errors**: Make sure you're running from project root
-2. **KV file not found**: Check that `.kv` file is in `src/foodallergyshield/`
-3. **Database errors**: Ensure `data/` directory exists
 
 ### Development vs Production
 
@@ -138,10 +133,3 @@ The project creates:
 ## 📄 License
 
 MIT License - see LICENSE file for details.
-
-## 👥 Contributing
-
-1. Make changes in `src/foodallergyshield/`
-2. Test with development scripts
-3. Update documentation if needed
-4. Create pull request
