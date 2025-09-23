@@ -1,5 +1,7 @@
 # Food Allergy Shield
 
+![Food Safety](img/all_allergies.png)
+
 A simple cross-platform application for managing food allergy information, built with Kivy.
 
 ## 🏗️ Project Structure
