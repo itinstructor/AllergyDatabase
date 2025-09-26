@@ -18,7 +18,7 @@ dependencies = [
 [tool.briefcase]
 project_name = "Food Allergy Shield"
 bundle = "com.wncc.foodallergyshield"
-version = "1.0.0"
+version = "0.0.1"
 url = "https://github.com/itinstructor/FoodAllergyShield"
 author = "WNCC Education"
 author_email = "education@wncc.org"
