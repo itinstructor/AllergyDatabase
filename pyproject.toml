@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [tool.briefcase]
-project_name = "Food Allergy Shield"
+project_name = "FoodAllergyShield"
 bundle = "com.billthecomputerguy.foodallergyshield"
 version = "0.0.1"
 url = "https://github.com/itinstructor/FoodAllergyShield"
