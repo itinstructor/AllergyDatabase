@@ -102,6 +102,7 @@ import csv
 import os
 from pathlib import Path
 
+# pip install kivy
 # Kivy imports: these provide UI widgets and app lifecycle functions
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
