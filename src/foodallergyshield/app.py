@@ -100,7 +100,6 @@ Files of interest:
 
 import csv
 import os
-import sys
 from pathlib import Path
 
 # pip install kivy
@@ -123,7 +122,7 @@ from kivy.uix.filechooser import FileChooserListView
 from kivy.uix.spinner import Spinner
 from kivy.uix.textinput import TextInput
 
-# Import the refactored DatabaseManager from its own module
+# Import DatabaseManager from its own module
 try:
     from .database_manager import DatabaseManager
 except ImportError:
@@ -410,11 +409,7 @@ class MainScreen(Screen):
         return
 
     def go_to_add(self):
-        """Switch to the Add Allergy screen.
-
-        Returns:
-            None
-        """
+        """Switch to the Add Allergy screen."""
         self.manager.current = "add_allergy"
 
     def go_to_list(self):
@@ -1348,10 +1343,10 @@ class SearchScreen(Screen):
 
 class AllergyDatabaseApp(App):
     """Main application class for Food Allergy Shield."""
-    
+
     # Prevent automatic KV loading by Kivy
     kv = ""
-    
+
     def __init__(self, **kwargs):
         """Initialize the app and set up ui_config early."""
         super().__init__(**kwargs)
@@ -1363,7 +1358,8 @@ class AllergyDatabaseApp(App):
         # Determine database path for both development and packaged environments
         # Try to find database in multiple locations
         import sys
-        if getattr(sys, 'frozen', False):
+
+        if getattr(sys, "frozen", False):
             # Running in a Briefcase bundle
             app_dir = Path(sys.executable).parent
             possible_db_paths = [
@@ -1373,33 +1369,36 @@ class AllergyDatabaseApp(App):
         else:
             # Running in development
             possible_db_paths = [
-                Path(__file__).parent / "food_allergies.db",  # Same directory as app
+                Path(__file__).parent
+                / "food_allergies.db",  # Same directory as app
                 Path.cwd() / "food_allergies.db",  # Current working directory
-                Path.cwd() / "data" / "food_allergies.db",  # Development data directory
+                Path.cwd()
+                / "data"
+                / "food_allergies.db",  # Development data directory
             ]
-        
+
         db_path = None
         for path in possible_db_paths:
             if path.exists():
                 db_path = str(path)
                 break
-        
+
         # If no existing database found, use the default name (will be created)
         if db_path is None:
             db_path = "food_allergies.db"
-            
+
         self.db_manager = DatabaseManager(db_path)
-        
+
         # Now load KV file with app context available
         # Handle both development and packaged environments
-        if getattr(sys, 'frozen', False):
+        if getattr(sys, "frozen", False):
             # Running in a Briefcase bundle - KV file should be in same directory
             app_dir = Path(sys.executable).parent
             kv_file = app_dir / "food_allergy_shield.kv"
         else:
             # Running in development
             kv_file = Path(__file__).parent / "food_allergy_shield.kv"
-            
+
         if kv_file.exists():
             Builder.load_file(str(kv_file))
         else:
@@ -1408,7 +1407,7 @@ class AllergyDatabaseApp(App):
                 Builder.load_file("food_allergy_shield.kv")
             except Exception as e:
                 print(f"Warning: Could not load KV file: {e}")
-            
+
         sm = ScreenManager()
         sm.add_widget(MainScreen(name="main"))
         sm.add_widget(AllergyEntryScreen(name="add_allergy"))
@@ -1453,16 +1452,18 @@ def main():
     except Exception as e:
         print(f"Error creating app: {e}")
         import traceback
+
         traceback.print_exc()
         raise
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         app = main()
         app.run()
     except Exception as e:
         print(f"Error running app: {e}")
         import traceback
+
         traceback.print_exc()
         input("Press Enter to exit...")  # Keep console open to see errors
