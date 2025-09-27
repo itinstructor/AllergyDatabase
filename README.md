@@ -43,17 +43,20 @@ FoodAllergyShield/
 ### Development Mode
 
 **Windows:**
+
 ```bash
 # Double-click or run:
 run_dev.bat
 ```
 
 **Python (all platforms):**
+
 ```bash
 python run_dev.py
 ```
 
 **Unix/Linux/macOS:**
+
 ```bash
 chmod +x run_dev.sh
 ./run_dev.sh
@@ -61,20 +64,41 @@ chmod +x run_dev.sh
 
 ### Packaging with Briefcase
 
+#### Automated Build (Recommended)
+
+Use the provided build scripts that handle both building and DLL copying:
+
+```bash
+# Windows Command Prompt
+scripts\build_complete.bat
+
+# PowerShell (more detailed output)
+.\scripts\build_complete.ps1
+```
+
+#### Manual Build Process
+
 ```bash
 # Development testing
 briefcase dev
 
 # Create/update build
 briefcase create
-briefcase update
 
 # Build executable
 briefcase build
 
+# Copy necessary DLLs (required for Windows)
+.\scripts\post_build.ps1
+
+# Run executable
+briefcase run
+
 # Create installer package
 briefcase package
 ```
+
+> **Note**: On Windows, the build scripts automatically copy necessary SDL2, GLEW, and ANGLE DLLs to fix runtime issues. See `scripts/README.md` for details.
 
 ## 📋 Requirements
 
@@ -83,6 +107,7 @@ briefcase package
 - Briefcase (for packaging)
 
 Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 pip install briefcase  # For packaging
@@ -128,7 +153,20 @@ The project creates:
 ### Development vs Production
 
 - **Development**: Use `run_dev.py` for quick testing
-- **Production**: Use `briefcase build` for final executable
+- **Production**: Use `scripts\build_complete.bat` or `briefcase build` + `scripts\post_build.ps1`
+
+### Common Windows Packaging Issues
+
+- **"DLL load failed" errors**: Use the build scripts in `scripts/` folder - they automatically copy required DLLs
+- **"'NoneType' object has no attribute 'size'"**: Fixed in current version with proper error handling
+- **Application won't start**: Run `scripts\build_complete.ps1` for detailed build process and error checking
+
+### Build Scripts
+
+The `scripts/` directory contains automated build tools:
+- `build_complete.bat/.ps1` - Complete build with DLL copying
+- `post_build.bat/.ps1/.sh` - DLL copying only (after manual build)
+- See `scripts/README.md` for detailed usage instructions
 
 ## 📄 License
 

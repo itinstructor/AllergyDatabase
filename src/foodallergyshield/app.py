@@ -100,6 +100,7 @@ Files of interest:
 
 import csv
 import os
+import sys
 from pathlib import Path
 
 # pip install kivy
@@ -143,8 +144,11 @@ class UIConfig:
         self.is_desktop = platform in ("win", "linux", "macosx")
 
         # If we're on desktop, set a reasonable window size for testing.
-        if self.is_desktop:
-            Window.size = (800, 600)
+        if self.is_desktop and Window is not None:
+            try:
+                Window.size = (800, 600)
+            except Exception as e:
+                print(f"Warning: Could not set window size: {e}")
 
         # How long to show success popups before auto-dismissing (seconds).
         self.success_popup_timeout = 2.5
@@ -1358,11 +1362,21 @@ class AllergyDatabaseApp(App):
         """Build and return the root widget for the app."""
         # Determine database path for both development and packaged environments
         # Try to find database in multiple locations
-        possible_db_paths = [
-            Path(__file__).parent / "food_allergies.db",  # Same directory as app
-            Path.cwd() / "food_allergies.db",  # Current working directory
-            Path.cwd() / "data" / "food_allergies.db",  # Development data directory
-        ]
+        import sys
+        if getattr(sys, 'frozen', False):
+            # Running in a Briefcase bundle
+            app_dir = Path(sys.executable).parent
+            possible_db_paths = [
+                app_dir / "food_allergies.db",  # App bundle directory
+                Path.cwd() / "food_allergies.db",  # Current working directory
+            ]
+        else:
+            # Running in development
+            possible_db_paths = [
+                Path(__file__).parent / "food_allergies.db",  # Same directory as app
+                Path.cwd() / "food_allergies.db",  # Current working directory
+                Path.cwd() / "data" / "food_allergies.db",  # Development data directory
+            ]
         
         db_path = None
         for path in possible_db_paths:
@@ -1377,11 +1391,23 @@ class AllergyDatabaseApp(App):
         self.db_manager = DatabaseManager(db_path)
         
         # Now load KV file with app context available
-        kv_file = Path(__file__).parent / "food_allergy_shield.kv"
+        # Handle both development and packaged environments
+        if getattr(sys, 'frozen', False):
+            # Running in a Briefcase bundle - KV file should be in same directory
+            app_dir = Path(sys.executable).parent
+            kv_file = app_dir / "food_allergy_shield.kv"
+        else:
+            # Running in development
+            kv_file = Path(__file__).parent / "food_allergy_shield.kv"
+            
         if kv_file.exists():
             Builder.load_file(str(kv_file))
         else:
-            Builder.load_file("food_allergy_shield.kv")
+            # Fallback - try current directory
+            try:
+                Builder.load_file("food_allergy_shield.kv")
+            except Exception as e:
+                print(f"Warning: Could not load KV file: {e}")
             
         sm = ScreenManager()
         sm.add_widget(MainScreen(name="main"))
@@ -1421,10 +1447,22 @@ def main():
     """
     The main entry point for the application.
     """
-    app = AllergyDatabaseApp()
-    return app
+    try:
+        app = AllergyDatabaseApp()
+        return app
+    except Exception as e:
+        print(f"Error creating app: {e}")
+        import traceback
+        traceback.print_exc()
+        raise
 
 
 if __name__ == '__main__':
-    app = main()
-    app.run()
+    try:
+        app = main()
+        app.run()
+    except Exception as e:
+        print(f"Error running app: {e}")
+        import traceback
+        traceback.print_exc()
+        input("Press Enter to exit...")  # Keep console open to see errors

@@ -13,6 +13,7 @@ authors = [
 requires-python = ">=3.8"
 dependencies = [
     "kivy>=2.3.0",
+    "pillow>=8.0.0",
 ]
 
 [tool.briefcase]
@@ -33,6 +34,7 @@ sources = ["src/foodallergyshield"]
 
 requires = [
     "kivy>=2.3.0",
+    "pillow>=8.0.0",
 ]
 
 # Console app for debugging
@@ -41,25 +43,44 @@ console_app = false
 # Include additional Python files in the app bundle
 [tool.briefcase.app.foodallergyshield.resources]
 "assets/icon.ico" = "icon.ico"
+"src/foodallergyshield/food_allergy_shield.kv" = "food_allergy_shield.kv"
 "data/sample_data.csv" = "sample_data.csv"
 "data/food_allergies.db" = "food_allergies.db"
 
 [tool.briefcase.app.foodallergyshield.windows]
 requires = [
     "kivy>=2.3.0",
+    "pillow>=8.0.0",
+    "kivy-deps.angle",
+    "kivy-deps.sdl2", 
+    "kivy-deps.glew",
 ]
+
+# Additional Windows-specific configuration
+system_requires = [
+    "Visual C++ Redistributable for Visual Studio 2019",
+]
+
+# Support additional resources and environment
+[tool.briefcase.app.foodallergyshield.windows.support]
+
+[tool.briefcase.app.foodallergyshield.windows.resources]
+"src/foodallergyshield/food_allergy_shield.kv" = "food_allergy_shield.kv"
 
 [tool.briefcase.app.foodallergyshield.macOS]
 requires = [
     "kivy>=2.3.0",
+    "pillow>=8.0.0",
 ]
 
 [tool.briefcase.app.foodallergyshield.linux]
 requires = [
     "kivy>=2.3.0",
+    "pillow>=8.0.0",
 ]
 
 [tool.briefcase.app.foodallergyshield.android]
 requires = [
     "kivy>=2.3.0",
+    "pillow>=8.0.0",
 ]
